@@ -38,13 +38,13 @@ class Tilemap:
         return rects
         # Criamos e retornamos os retangulos para os tiles que estão próximo ao elemento para que a colisão aconteça
     
-    def render(self, surf):
+    def render(self, surf, offset=(0,0)):
         for tile in self.offgrid_tiles:
-            surf.blit(self.game.assets[tile['type']][tile['variant']], tile['pos'])
+            surf.blit(self.game.assets[tile['type']][tile['variant']], (tile['pos'][0] - offset[0], tile['pos'][1] - offset[1]))
         
         for loc in self.tilemap:
             tile = self.tilemap[loc]
-            surf.blit(self.game.assets[tile['type']][tile['variant']], (tile['pos'][0] * self.tile_size, tile['pos'][1] * self.tile_size))
+            surf.blit(self.game.assets[tile['type']][tile['variant']], (tile['pos'][0] * self.tile_size - offset[0], tile['pos'][1] * self.tile_size - offset[1]))
             # self.game.assets[tile['type']][tile['variant']] -> o asset em questão é uma lista
             # então passamos além do tipo do asset qual asset da lista queremos
             # (tile['pos'][0] * self.tile_size, tile['pos'][1] * self.tile_size) -> precisamos multiplicar a posição

@@ -56,6 +56,11 @@ class PhysicsEntity:
             self.velocity[1] = 0
         
         
-    def render(self, surf):
-        surf.blit(self.game.assets['player'], self.pos)
+    def render(self, surf, offset=(0,0)):
+        surf.blit(self.game.assets['player'], (self.pos[0] - offset[0], self.pos[1] - offset[1]))
+        # tanto o render dessa classe, quanto o render da classe Tilemap (em scripts/tilemap.py)
+        # possuem o argumento offset, que serve como "câmera" para gente
+        # estamos subtraindo o offset no eixo x e no y para que quando o persongam se vá para direita
+        # o todo o resto deverá ir para esquerda, dando a sensação de movimento do mapa, ou movimento
+        # de câmera
         
